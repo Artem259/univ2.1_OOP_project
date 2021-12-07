@@ -39,7 +39,7 @@ void MainWindow::resizeTable(QTableWidget *table, size_t rowsTarget, size_t cols
             QLineEdit *data = new QLineEdit(table);
             data->setObjectName(QString::number(currRows) + "_" + QString::number(i));
             auto validator = new QDoubleValidator(this);
-            validator->setDecimals(10);
+            validator->setDecimals(3);
             data->setValidator(validator);
             table->setCellWidget(currRows, i, data);
             data->setAlignment(Qt::AlignCenter);
@@ -62,7 +62,7 @@ void MainWindow::resizeTable(QTableWidget *table, size_t rowsTarget, size_t cols
             QLineEdit *data = new QLineEdit(table);
             data->setObjectName(QString::number(i) + "_" + QString::number(currCols));
             auto validator = new QDoubleValidator(this);
-            validator->setDecimals(10);
+            validator->setDecimals(3);
             data->setValidator(validator);
             table->setCellWidget(i, currCols, data);
             data->setAlignment(Qt::AlignCenter);
@@ -115,11 +115,11 @@ void MainWindow::setMatrix(Eigen::MatrixXd *from, QTableWidget *to)
             QLineEdit *data = to->findChild<QLineEdit*>(QString::number(i)+"_"+QString::number(k));
             if(data)
             {
-                data->setText(QString::number((*from)(i,k), 'g', 10));
+                data->setText(QString::number((*from)(i,k), 'f', 3));
             }
             else
             {
-                to->item(i,k)->setText(QString::number((*from)(i,k), 'g', 10));
+                to->item(i,k)->setText(QString::number((*from)(i,k), 'f', 3));
             }
         }
     }
